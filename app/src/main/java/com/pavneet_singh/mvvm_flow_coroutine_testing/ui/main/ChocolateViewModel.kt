@@ -18,6 +18,10 @@ class ChocolateViewModel(private val useCase: ChocolateUseCase) :
     private val viewState =
         ChocolateViewState()
 
+    /**
+     *  Fetch the dummy data as Flow, from use case
+     *  then return the LiveData after applying the transformation via mapping
+     */
     fun onOptionsSelected(): LiveData<ChocolateViewState> {
         return useCase.getListOfChocolates(ChocolateAction.GetChocolateList)
                 .map {
