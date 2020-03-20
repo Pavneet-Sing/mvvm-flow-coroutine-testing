@@ -1,0 +1,2 @@
+rootProject.name='mvvm-flow-coroutine-testing'
+include ':app'
