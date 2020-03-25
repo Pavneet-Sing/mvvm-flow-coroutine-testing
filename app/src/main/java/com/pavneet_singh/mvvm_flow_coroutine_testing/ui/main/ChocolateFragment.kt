@@ -44,11 +44,11 @@ class ChocolateFragment : Fragment() {
         viewModel = ViewModelProvider(this, chocoLateFactory).get(ChocolateViewModel::class.java)
         viewModel.onOptionsSelected().observe(viewLifecycleOwner, Observer {
             if (it.loading) {
-                tvMessage.text = "Loading"
+                tvMessage.text = getString(R.string.dummy_response_msg)
             } else if (!it.loading && it.data.isNotEmpty()) {
                 tvMessage.text = it.run { "${it.data[0].name} Now run the test" }
             } else {
-                tvMessage.text = "Error"
+                tvMessage.text = getString(R.string.error_response_msg)
             }
         })
     }
