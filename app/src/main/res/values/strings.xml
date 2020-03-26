@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">mvvm-flow-coroutine-testing</string>
+    <string name="dummy_response_msg">Loading</string>
+    <string name="error_response_msg">Error</string>
 </resources>

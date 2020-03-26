@@ -14,7 +14,11 @@ import com.pavneet_singh.mvvm_flow_coroutine_testing.ui.main.usecase.ChocolateUs
 
 class MainActivity : AppCompatActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+
+    /**
+     * Load the chocolate fragment
+     */
+        override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
         if (savedInstanceState == null) {

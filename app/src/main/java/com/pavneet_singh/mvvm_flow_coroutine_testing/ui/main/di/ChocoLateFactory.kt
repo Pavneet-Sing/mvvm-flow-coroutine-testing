@@ -9,6 +9,9 @@ import com.pavneet_singh.mvvm_flow_coroutine_testing.ui.main.usecase.ChocolateUs
  * Created by Pavneet_Singh on 20/03/20.
  */
 
+/**
+ * Helper class for chocolate viewmodel instantiation
+ */
 @Suppress("UNCHECKED_CAST")
 class ChocoLateFactory(private val useCase: ChocolateUseCase) :
     ViewModelProvider.NewInstanceFactory() {
