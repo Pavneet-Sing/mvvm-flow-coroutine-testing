@@ -2,19 +2,16 @@ package com.pavneet_singh.mvvm_flow_coroutine_testing.ui.main
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import androidx.lifecycle.SavedStateHandle
 import com.pavneet_singh.mvvm_flow_coroutine_testing.ui.main.usecase.*
 import com.pavneet_singh.temp.MainCoroutineScopeRule
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
-import org.junit.Test
-
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
+import org.junit.Test
 import org.mockito.*
-import org.mockito.ArgumentMatchers.anyLong
 
 /**
  * Created by Pavneet_Singh on 20/03/20.
@@ -62,7 +59,8 @@ class ChocolateViewModelTest {
                 emit(ChocolateResult.ChocolateList(chocolateList))
             }
 
-            Mockito.`when`(useCase.getListOfChocolates(ChocolateAction.GetChocolateList)).thenReturn(flow)
+            Mockito.`when`(useCase.getListOfChocolates(ChocolateAction.GetChocolateList))
+                .thenReturn(flow)
             Mockito.`when`(chocolateList.get(0)).thenReturn(
                 ChocolateModel(
                     "Pavneet",
@@ -72,11 +70,16 @@ class ChocolateViewModelTest {
             val liveData = myViewModel.onOptionsSelected()
             liveData.observeForever(mockObserver) // to trigger the transformation
 
-            Mockito.verify(mockObserver).onChanged(captor.capture()) // loading state has been received
+            Mockito.verify(mockObserver)
+                .onChanged(captor.capture()) // loading state has been received
             assertEquals(true, captor.value.loading)
             coroutineScope.advanceTimeBy(10)
-            Mockito.verify(mockObserver, Mockito.times(2)).onChanged(captor.capture()) // onchange has been triggered twice
-            assertEquals("Pavneet", captor.value.data[0].name) // assert the received value i.e. chocolate state
+            Mockito.verify(mockObserver, Mockito.times(2))
+                .onChanged(captor.capture()) // onchange has been triggered twice
+            assertEquals(
+                "Pavneet",
+                captor.value.data[0].name
+            ) // assert the received value i.e. chocolate state
         }
     }
 }
