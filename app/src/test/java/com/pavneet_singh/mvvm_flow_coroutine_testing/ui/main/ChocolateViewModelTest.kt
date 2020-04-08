@@ -6,7 +6,7 @@ import com.pavneet_singh.mvvm_flow_coroutine_testing.ui.main.usecase.*
 import com.pavneet_singh.temp.MainCoroutineScopeRule
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
@@ -52,7 +52,7 @@ class ChocolateViewModelTest {
 
     @Test
     fun onOptionsSelected() {
-        runBlocking {
+        coroutineScope.runBlockingTest {
             val flow = flow {
                 emit(ChocolateResult.Loading)
                 delay(10)
