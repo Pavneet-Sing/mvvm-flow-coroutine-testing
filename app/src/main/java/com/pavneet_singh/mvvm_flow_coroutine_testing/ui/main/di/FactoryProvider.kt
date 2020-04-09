@@ -1,6 +1,5 @@
 package com.pavneet_singh.mvvm_flow_coroutine_testing.ui.main.di
 
-import androidx.lifecycle.ViewModelProvider
 import com.pavneet_singh.mvvm_flow_coroutine_testing.ui.main.usecase.ChocolateUseCase
 
 /**

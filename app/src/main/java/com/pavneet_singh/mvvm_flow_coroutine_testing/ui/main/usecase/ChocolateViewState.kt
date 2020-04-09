@@ -11,6 +11,6 @@ data class ChocolateViewState(
     val loading: Boolean = false,
     val data: List<ChocolateModel> = emptyList(),
     val error: String? = null
-    )
+)
 
-data class ChocolateModel(val name:String = "choco", val id :Int=-1)
+data class ChocolateModel(val name: String = "choco", val id: Int = -1)

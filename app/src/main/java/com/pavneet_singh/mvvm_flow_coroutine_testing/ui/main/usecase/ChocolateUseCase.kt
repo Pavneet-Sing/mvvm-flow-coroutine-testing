@@ -15,18 +15,25 @@ class ChocolateUseCase {
      *  @param delay: Long to add delay between response
      *  @param chocolateAction: ChocolateAction to perform network call as per type
      */
-    fun getListOfChocolates(chocolateAction: ChocolateAction, delay: Long= 6000): Flow<ChocolateResult> {
+    fun getListOfChocolates(
+        chocolateAction: ChocolateAction,
+        delay: Long = 6000
+    ): Flow<ChocolateResult> {
         return flow {
-            when(chocolateAction){
-                ChocolateAction.GetChocolateList ->{
+            when (chocolateAction) {
+                ChocolateAction.GetChocolateList -> {
                     emit(ChocolateResult.Loading)
                     delay(delay)
-                    emit(ChocolateResult.ChocolateList(arrayListOf(
-                        ChocolateModel(
-                            "Chocolates are awesome!",
-                            1
+                    emit(
+                        ChocolateResult.ChocolateList(
+                            arrayListOf(
+                                ChocolateModel(
+                                    "Chocolates are awesome!",
+                                    1
+                                )
+                            )
                         )
-                    )))
+                    )
                 }
             }
         }

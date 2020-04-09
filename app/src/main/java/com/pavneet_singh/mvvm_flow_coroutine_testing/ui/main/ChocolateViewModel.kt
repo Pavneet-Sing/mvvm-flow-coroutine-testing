@@ -1,6 +1,9 @@
 package com.pavneet_singh.mvvm_flow_coroutine_testing.ui.main
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import com.pavneet_singh.mvvm_flow_coroutine_testing.ui.main.usecase.ChocolateAction
 import com.pavneet_singh.mvvm_flow_coroutine_testing.ui.main.usecase.ChocolateResult
 import com.pavneet_singh.mvvm_flow_coroutine_testing.ui.main.usecase.ChocolateUseCase
@@ -13,7 +16,7 @@ import kotlinx.coroutines.flow.map
  */
 
 class ChocolateViewModel(private val useCase: ChocolateUseCase) :
-        ViewModel() {
+    ViewModel() {
 
     private val viewState =
         ChocolateViewState()
@@ -24,13 +27,16 @@ class ChocolateViewModel(private val useCase: ChocolateUseCase) :
      */
     fun onOptionsSelected(): LiveData<ChocolateViewState> {
         return useCase.getListOfChocolates(ChocolateAction.GetChocolateList)
-                .map {
-                    when (it) {
-                        is ChocolateResult.Loading -> viewState.copy(loading = true)
-                        is ChocolateResult.ChocolateList -> viewState.copy(loading = false, data = it.choclateList)
-                        is ChocolateResult.Error -> viewState.copy(loading = false, error = "Error")
-                        else -> viewState.copy(loading = false, error = "Error")
-                    }
-                }.asLiveData(Dispatchers.Default + viewModelScope.coroutineContext)
+            .map {
+                when (it) {
+                    is ChocolateResult.Loading -> viewState.copy(loading = true)
+                    is ChocolateResult.ChocolateList -> viewState.copy(
+                        loading = false,
+                        data = it.choclateList
+                    )
+                    is ChocolateResult.Error -> viewState.copy(loading = false, error = "Error")
+                    else -> viewState.copy(loading = false, error = "Error")
+                }
+            }.asLiveData(Dispatchers.Default + viewModelScope.coroutineContext)
     }
 }
